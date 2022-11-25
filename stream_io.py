@@ -217,7 +217,7 @@ class ZipBase(object):
         pass
 
     @abstractmethod
-    def namelist(self): pass
+    def namelist(self) -> List[str]: pass
 
     def listdir(self, dir_name):
         file_list = [f[f.find(dir_name) + len(dir_name):] for f in self.namelist() if f.find(dir_name) != -1]
@@ -280,7 +280,7 @@ class GroupZipIO(ZipBase):
             for n in z_m.namelist():
                 self._names_map[n] = z_idx
 
-    def namelist(self):
+    def namelist(self) -> List[str]:
         return self._names_list
 
     def has_file(self, file_name):
