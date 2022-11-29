@@ -76,9 +76,10 @@ class DictRecursive(object):
             cls_arg_value = float(arg_value) if arg_value is not None else cls_arg
         elif isinstance(cls_arg, list):
             cls_arg_value = list()
+            cls_arg_e = str() if not cls_arg else cls_arg[0]
             if arg_value is not None:
                 for a_v in arg_value:
-                    cls_arg_value.append(DictRecursive.parse_single_arg(cls_arg[0], a_v, shared_dict))
+                    cls_arg_value.append(DictRecursive.parse_single_arg(cls_arg_e, a_v, shared_dict))
         elif isinstance(cls_arg, dict):
             if arg_value is not None:
                 cls_arg_value = dict()
