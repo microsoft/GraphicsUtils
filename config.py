@@ -31,6 +31,7 @@ class DictRecursive(object):
                 arg_value = shared_dict[cls_arg_name] if cls_arg_name in shared_dict.keys() else arg_value
             cls_arg = self.__dict__[cls_arg_name]
             self.__dict__[cls_arg_name] = self.parse_single_arg(cls_arg, arg_value, shared_dict)
+        return self
 
     def save(self):
         save_dict = {}
