@@ -38,6 +38,7 @@ class PlyIO(object):
         self.vertices = vertices if self.vertices is None else np.concatenate([self.vertices, vertices], axis=0)
         self.vertices_color = colors if self.vertices_color is None else np.concatenate([self.vertices_color, colors],
                                                                                         axis=0)
+        return self
 
     def get_num_vertices(self):
         return 0 if self.vertices is None else self.vertices.shape[0]
