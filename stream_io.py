@@ -82,7 +82,7 @@ class PlyIO(object):
             self.lines_color = line_color if self.lines_color is None else np.concatenate(
                 [self.lines_color, line_color], axis=0)
 
-    def add_box(self, box_vertices, colors=None):
+    def add_box(self, box_vertices, colors=None, line_only=False):
         box_vertices = np.reshape(box_vertices, [-1, box_vertices.shape[-1]]).astype(np.float32)
         assert box_vertices.shape[-1] in [3, 6]
         if box_vertices.shape[-1] == 6:
@@ -100,7 +100,9 @@ class PlyIO(object):
         face_rgbs_list = np.concatenate([[colors[v_i]] * 12 for v_i in range(0, len(box_vertices), 8)], axis=0)
         edge_colors_list = np.concatenate([[colors[v_i]] * 12 for v_i in range(0, len(box_vertices), 8)], axis=0)
 
-        self.add_faces(box_vertices, obb_face_list, vertices_color=colors, faces_color=face_rgbs_list)
+        if not line_only:
+            self.add_faces(box_vertices, obb_face_list, vertices_color=colors, \
+                faces_color=face_rgbs_list)
         self.add_lines(box_vertices, obb_edge_list, vertices_color=colors, lines_color=edge_colors_list)
 
     def load(self, file_path):
